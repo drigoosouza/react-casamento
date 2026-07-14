@@ -1,0 +1,660 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&display=swap');
+
+/* Fontes e Cores Base */
+:root {
+  --primary-color: #2f3b1c; /* Verde Oliva */
+  --bg-color: #fcf9f2; /* Creme artesanal da imagem */
+  --text-dark: #3a2218;
+  --font-body: 'Cormorant Garamond', serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* =========================================
+   TRAVANDO A TELA PRINCIPAL (SPA)
+   ========================================= */
+body, html {
+  font-family: var(--font-body);
+  background-color: var(--bg-color);
+  color: var(--text-dark);
+  overflow: hidden; /* Remove o scroll nativo do site inteiro */
+  height: 100vh;
+}
+
+.app-container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+}
+
+/* =========================================
+   MENU DESKTOP
+   ========================================= */
+.navbar {
+  position: absolute;
+  top: 40px;
+  right: 50px;
+  z-index: 1000;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  position: relative;
+  color: var(--primary-color);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -5px;
+  left: 0;
+  background-color: var(--primary-color);
+  transition: width 0.3s ease;
+}
+
+.nav-links a.active::after, .nav-links a:hover::after {
+  width: 100%;
+}
+
+/* =========================================
+   TELA DIVIDIDA (HERO) E PAPEL
+   ========================================= */
+.hero-split {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  background-color: #e8dccb;
+  position: relative;
+}
+
+.hero-imagem {
+  width: 50%;
+  height: 100%;
+  position: relative;
+}
+
+.hero-imagem img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* A curva de sobreposição com scroll interno */
+.hero-papel {
+  width: 55%;
+  margin-left: -5%;
+  background-color: var(--bg-color);
+  border-radius: 120px 0 0 120px;
+  box-shadow: -15px 0 40px rgba(0,0,0,0.1);
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Alinhamento do conteúdo pro topo */
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  padding: 80px 80px;
+  text-align: center;
+
+  /* Faz o papel ter scroll independente */
+  overflow-y: auto; 
+  overflow-x: hidden;
+}
+
+/* Esconde a barra de rolagem feia do papel */
+.hero-papel::-webkit-scrollbar {
+  display: none;
+}
+
+/* =========================================
+   ANIMAÇÃO DE TROCA DE TELA
+   ========================================= */
+.conteudo-animado {
+  animation: fadeIn 0.5s ease-in-out;
+  width: 100%;
+  margin: auto; /* Mantém centralizado se o conteúdo for curto */
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* =========================================
+   TIPOGRAFIA DO PAPEL
+   ========================================= */
+.hero-subtitulo {
+  font-size: 1rem;
+  letter-spacing: 5px;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+}
+
+.hero-titulo {
+  font-size: 5rem;
+  color: var(--primary-color);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1;
+  margin-bottom: 30px;
+}
+
+.data-casamento {
+  display: none; /* Escondido por padrão no desktop */
+  font-family: var(--font-body);
+  font-size: 1.6rem;
+  color: var(--primary-color);
+  font-style: italic;
+  margin-bottom: 25px;
+  letter-spacing: 1px;
+}
+
+.hero-texto {
+  font-size: 1rem;
+  max-width: 450px;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 40px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.btn-view-more {
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  padding: 15px 40px;
+  border-radius: 30px;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.btn-view-more:hover {
+  opacity: 0.8;
+}
+
+/* =========================================
+   CONTAGEM REGRESSIVA (DESKTOP)
+   ========================================= */
+.countdown-container {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-bottom: 40px;
+  margin-top: 20px;
+}
+
+.countdown-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--primary-color);
+  padding: 10px 15px;
+  border-radius: 8px;
+  min-width: 65px;
+}
+
+.countdown-box span {
+  font-size: 1.8rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.countdown-box small {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 5px;
+}
+
+/* =========================================
+   SEÇÕES GENÉRICAS E CARDS (Cerimônia, Galeria, Presentes)
+   ========================================= */
+.page-section {
+  width: 100%;
+}
+
+.section-title {
+  font-size: 3rem;
+  color: var(--primary-color);
+  margin-bottom: 10px;
+  font-style: italic;
+}
+
+.section-subtitle {
+  color: #666;
+  margin-bottom: 40px;
+  font-size: 1.1rem;
+}
+
+.cerimonia-content {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  margin-top: 20px;
+}
+
+.cerimonia-dados {
+  padding: 30px;
+  background: var(--primary-color);
+  color: #fff;
+}
+
+.cerimonia-dados h3 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+}
+
+.cerimonia-dados p {
+  margin-bottom: 5px;
+  font-size: 1.1rem;
+}
+
+.mapa-container {
+  width: 100%;
+  height: 300px;
+}
+
+/* =========================================
+   GALERIA EM GRID (3 COLUNAS E ALTURAS DIFERENTES)
+   ========================================= */
+.galeria-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Sempre 3 colunas */
+  gap: 12px;
+  margin-top: 20px;
+  align-items: start; /* Impede as fotos de se esticarem para ter a mesma altura */
+}
+
+.galeria-grid img {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.3s;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.galeria-grid img:hover {
+  transform: scale(1.03);
+}
+
+/* Alturas assimétricas para as imagens na Galeria */
+.galeria-grid img:nth-child(3n+1) {
+  height: 180px;
+}
+.galeria-grid img:nth-child(3n+2) {
+  height: 250px;
+}
+.galeria-grid img:nth-child(3n) {
+  height: 210px;
+}
+
+/* =========================================
+   LISTA DE PRESENTES (3 COLUNAS - CARDS MENORES)
+   ========================================= */
+.presentes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Sempre 3 colunas */
+  gap: 15px; /* Espaçamento menor para acomodar 3 colunas */
+}
+
+.card-presente {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  transition: transform 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-presente:hover {
+  transform: translateY(-5px);
+}
+
+.card-presente img {
+  width: 100%;
+  height: 110px; /* Altura reduzida para os cards menores */
+  object-fit: cover;
+}
+
+.card-info {
+  padding: 12px; /* Padding reduzido */
+  text-align: center;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-info h3 {
+  color: var(--primary-color);
+  font-size: 0.95rem; /* Fonte menor */
+  margin-bottom: 4px;
+}
+
+.card-info p {
+  color: #666;
+  font-weight: 600;
+  font-size: 0.85rem;
+  margin-bottom: 10px;
+}
+
+.btn-presente {
+  background: transparent;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  padding: 6px 12px; /* Botão compacto */
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  width: 100%;
+}
+
+.btn-presente:hover {
+  background: var(--primary-color);
+  color: #fff;
+}
+
+/* =========================================
+   MODAL E TOAST (RSVP)
+   ========================================= */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carta-antiga {
+  background-color: var(--bg-color);
+  width: 90%;
+  max-width: 500px;
+  padding: 50px 40px;
+  border-radius: 10px;
+  text-align: center;
+  position: relative;
+}
+
+.fechar-modal {
+  position: absolute;
+  top: 15px; right: 20px;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #888;
+}
+
+.carta-titulo {
+  font-size: 3.5rem;
+  color: var(--primary-color);
+  font-style: italic;
+}
+
+.input-carta {
+  width: 100%;
+  padding: 12px 5px;
+  margin-bottom: 20px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(47, 59, 28, 0.3);
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+}
+
+.input-carta:focus {
+  outline: none;
+  border-bottom: 2px solid var(--primary-color);
+}
+
+.acompanhantes-container {
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.toast-notificacao {
+  position: fixed;
+  bottom: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: 15px 35px;
+  border-radius: 50px;
+  transition: bottom 0.5s;
+  z-index: 999999;
+}
+
+.toast-notificacao.mostrar {
+  bottom: 40px;
+}
+
+/* =========================================
+   CONTROLES DE VISIBILIDADE
+   ========================================= */
+.desktop-only {
+  display: block;
+}
+
+.mobile-navbar {
+  display: none; 
+}
+
+/* =========================================
+   RESPONSIVIDADE E O MENU PÍLULA MOBILE
+   ========================================= */
+@media (max-width: 900px) {
+  .desktop-only {
+    display: none !important;
+  }
+
+  /* =========================================
+     NAVBAR MOBILE - MENU COM TEXTO EMBAIXO DO ÍCONE
+     ========================================= */
+  .mobile-navbar {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    background-color: var(--bg-color); /* Fundo Verde Oliva */
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 5px; /* Padding reduzido para dar espaço vertical */
+    z-index: 9999;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.3);
+    padding-bottom: calc(10px + env(safe-area-inset-bottom)); 
+  }
+
+  .mobile-icon {
+    width: 70px;
+    height: 55px; /* Altura ideal */
+    display: flex;
+    flex-direction: column; /* Organização vertical do Ícone + Nome */
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    border-radius: 12px;
+  }
+
+  .mobile-icon svg {
+    width: 24px;
+    height: 24px;
+    fill: #070707; /* Ícones em creme */
+    opacity: 0.6;
+    transition: all 0.3s ease;
+  }
+
+  .menu-text {
+    display: block;
+    max-height: 0; /* Esconde o texto por padrão */
+    opacity: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    font-size: 0.7rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--primary-color);
+    transform: translateY(5px);
+  }
+
+  /* O EFEITO ATIVO MOBILE: Fundo creme, sobe levemente e revela o texto abaixo */
+  .mobile-icon.active {
+    background-color: var(--bg-color); /* Caixinha off-white */
+    transform: translateY(-8px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    padding: 6px 0;
+    height: 60px;
+  }
+
+  .mobile-icon.active svg {
+    fill: var(--primary-color); /* Ícone fica verde oliva */
+    opacity: 1;
+    transform: scale(0.9); /* Reduz levemente para acomodar o texto abaixo */
+  }
+
+  .mobile-icon.active .menu-text {
+    max-height: 15px; /* Expande o texto */
+    opacity: 1;
+    transform: translateY(0); /* Desliza para cima de forma suave */
+    margin-top: 2px;
+  }
+
+  /* =========================================
+     MUDANÇA DA CONTAGEM REGRESSIVA NO MOBILE
+     ========================================= */
+  .countdown-container {
+    position: absolute;
+    top: 20px; /* Joga a contagem no topo da tela */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    background: rgba(252, 249, 242, 0.545); /* Efeito vidro claro para contrastar na foto */
+    backdrop-filter: blur(0);
+    padding: 6px 10px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    margin-bottom: 0;
+    gap: 8px;
+    width: auto;
+  }
+
+  .countdown-box {
+    min-width: 50px;
+    padding: 5px 8px;
+    
+  }
+
+  .countdown-box span {
+    font-size: 1.2rem;
+  }
+
+  .countdown-box small {
+    font-size: 0.55rem;
+  }
+
+  /* Exibe a data no papel na home */
+  .data-casamento {
+    display: block; /* Revela onde ficava o contador */
+  }
+
+  /* =========================================
+     AJUSTES DE TELA MOBILE (SPA)
+     ========================================= */
+  .hero-split {
+    flex-direction: column;
+    height: 100vh;
+  }
+  
+  .hero-imagem {
+    width: 100%;
+    height: 40vh; /* Foto travada no topo */
+    flex-shrink: 0;
+  }
+  
+  .hero-papel {
+    width: 100%;
+    height: 100vh; /* Papel rola independentemente */
+    margin-left: 0;
+    margin-top: -80px;
+    border-radius: 40px 40px 0 0;
+    padding: 40px 15px 130px 15px; /* Respiro pro menu não cobrir os botões */
+  }
+  
+  .hero-titulo {
+    font-size: 3.5rem;
+  }
+
+  /* Ajuste responsivo para os grids de 3 colunas em telas muito pequenas */
+  .presentes-grid {
+    gap: 8px;
+  }
+  .card-presente img {
+    height: 80px;
+  }
+  .card-info {
+    padding: 6px;
+  }
+  .card-info h3 {
+    font-size: 0.75rem;
+  }
+  .card-info p {
+    font-size: 0.7rem;
+    margin-bottom: 6px;
+  }
+  .btn-presente {
+    font-size: 0.65rem;
+    padding: 4px 8px;
+  }
+
+  .galeria-grid {
+    gap: 6px;
+  }
+  .galeria-grid img:nth-child(3n+1) {
+    height: 90px;
+  }
+  .galeria-grid img:nth-child(3n+2) {
+    height: 130px;
+  }
+  .galeria-grid img:nth-child(3n) {
+    height: 110px;
+  }
+}
