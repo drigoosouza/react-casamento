@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 
 export default function App() {
@@ -150,7 +150,6 @@ export default function App() {
           {/* CONTEÚDO 1: INÍCIO */}
           {secaoAtiva === 'home' && (
             <div className="conteudo-animado">
-              <p className="hero-subtitulo">save the date</p>
               <h1 className="hero-titulo">Rodrigo & Saniele</h1>
               
               {/* Data que aparece no lugar do cronômetro no mobile */}
@@ -205,28 +204,28 @@ export default function App() {
               <div className="presentes-grid">
                 
                 <div className="card-presente">
-                  <img src="https://images.unsplash.com/photo-1588693836371-d41a33c09f3e?q=80&w=400" alt="Cota Lua de Mel" />
+                  <img src="/presentes/12-netflix.webp" alt="Cota Lua de Mel" />
                   <div className="card-info">
-                    <h3>Cota Lua de Mel</h3>
-                    <p>R$ 150</p>
+                    <h3>6 meses de netflix para os noivos</h3>
+                    <p>R$ 121,80</p>
                     <button className="btn-presente" onClick={() => alert("Exibir PIX aqui")}>Presentear</button>
                   </div>
                 </div>
 
                 <div className="card-presente">
-                  <img src="https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?q=80&w=400" alt="Jantar" />
+                  <img src="/presentes/nao-dei-nada.webp" alt="Jantar" />
                   <div className="card-info">
-                    <h3>Jantar Romântico</h3>
-                    <p>R$ 200</p>
+                    <h3>Só pra não dizer que não dei nada</h3>
+                    <p>R$ 50,00</p>
                     <button className="btn-presente" onClick={() => alert("Exibir PIX aqui")}>Presentear</button>
                   </div>
                 </div>
 
                 <div className="card-presente">
-                  <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=400" alt="Jogo de Pratos" />
+                  <img src="/presentes/cabelo-regua.webp" alt="Jogo de Pratos" />
                   <div className="card-info">
-                    <h3>Jogo de Pratos</h3>
-                    <p>R$ 120</p>
+                    <h3>Cota pra deixar o cabelo do noivo na régua por 1 ano</h3>
+                    <p>R$ 300,00</p>
                     <button className="btn-presente" onClick={() => alert("Exibir PIX aqui")}>Presentear</button>
                   </div>
                 </div>
