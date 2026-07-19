@@ -57,18 +57,6 @@ export default function App() {
     { id: 31, titulo: 'Cota aposentadoria', valor: 'R$ 5.232,00', imagem: 'presentes/aposentadoria.webp', pixCopiaECola: PIX, linkCartao: CARDCRED }
   ];
 
-  // ==========================================
-  // FUNÇÃO FULLSCREEN (ESCONDE AS BARRAS)
-  // ==========================================
-  const abrirConvite = () => {
-    const elem = document.documentElement;
-    if (elem.requestFullscreen) {
-      elem.requestFullscreen().catch((err) => console.log(err));
-    } else if (elem.webkitRequestFullscreen) {
-      elem.webkitRequestFullscreen(); // Safari
-    }
-    setEntrouNoSite(true);
-  };
 
   // ==========================================
   // CONTAGEM REGRESSIVA
@@ -162,24 +150,6 @@ export default function App() {
       mostrarAviso("Código Pix copiado! 📋");
     }
   };
-
-  // ==========================================
-  // RENDERIZAÇÃO: CAPA DE BOAS VINDAS OU SITE
-  // ==========================================
-  if (!entrouNoSite) {
-    return (
-      <div className="tela-boas-vindas">
-        <div className="boas-vindas-conteudo">
-          <p className="hero-subtitulo">O CASAMENTO DE</p>
-          <h1 className="hero-titulo">Rodrigo & Saniele</h1>
-          <p className="boas-vindas-data">06 de Setembro de 2026</p>
-          <button className="btn-view-more btn-entrar" onClick={abrirConvite}>
-            Abrir Convite
-          </button>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="app-container">
