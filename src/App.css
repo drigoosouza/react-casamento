@@ -413,7 +413,8 @@ body, html {
   background-color: var(--bg-color);
   width: 90%;
   max-width: 500px;
-  padding: 50px 40px;
+  padding-top: 10px;
+  padding:20px 40px 50px 40px;
   border-radius: 10px;
   text-align: center;
   position: relative;
@@ -430,9 +431,17 @@ body, html {
 }
 
 .carta-titulo {
-  font-size: 3.5rem;
+  font-size: 1rem;
+  font-family: "roboto";
   color: var(--primary-color);
   font-style: italic;
+  margin-bottom: 30px;
+
+}
+.carta-texto{
+  font-family: "roboto";
+  color: #666;
+  margin-bottom: 10px;
 }
 
 .input-carta {
@@ -441,9 +450,20 @@ body, html {
   margin-bottom: 20px;
   background: transparent;
   border: none;
+  outline: none;
   border-bottom: 1px solid rgba(47, 59, 28, 0.3);
-  font-family: var(--font-body);
-  font-size: 1.1rem;
+  font-family:"roboto";
+  font-size: 0.8rem;
+}
+select{
+  border: none;
+  outline: none;
+
+}
+.input-carta option{
+  background-color: #fcf9f2;
+  font-family: "roboto";
+  font-size: .7rem;
 }
 
 .input-carta:focus {
@@ -570,50 +590,7 @@ body, html {
   background-color: rgba(47, 59, 28, 0.1);
   color: var(--primary-color);
 }
-/* =========================================
-   TELA DE BOAS VINDAS (CAPA DO CONVITE)
-   ========================================= */
-.tela-boas-vindas {
-  height: 100vh;
-  width: 100vw;
-  background-color: var(--bg-color);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  /* Se quiser, pode colocar a foto de vocês desfocada de fundo aqui */
-  /* background: url('SUA_IMAGEM.jpg') center/cover; */
-}
 
-.boas-vindas-conteudo {
-  background: rgba(252, 249, 242, 0.95);
-  padding: 50px 30px;
-  border-radius: 20px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-  border: 1px solid rgba(47, 59, 28, 0.1);
-  animation: fadeIn 1s ease-in-out;
-}
-
-.boas-vindas-data {
-  font-family: var(--font-body);
-  font-size: 1.4rem;
-  color: var(--text-dark);
-  margin-top: -15px;
-  margin-bottom: 30px;
-  letter-spacing: 2px;
-}
-
-.btn-entrar {
-  font-size: 1rem;
-  padding: 15px 50px;
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
-}
 
 /* =========================================
    BOTÕES DA TELA HOME
@@ -644,6 +621,53 @@ body, html {
   color: var(--primary-color);
   opacity: 1;
 }
+/* =========================================
+   ANIMAÇÕES E ESTRUTURA DO WIZARD (RSVP)
+   ========================================= */
+.step-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* Efeito deslizante quando a etapa muda */
+.animar-entrada {
+  animation: fadeInStep 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes fadeInStep {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* Arrumando os botões na mesma linha */
+.rsvp-botoes {
+  display: flex;
+  gap: 15px;
+  margin-top: 25px;
+  width: 100%;
+  justify-content: center;
+}
+
+/* No celular, coloca o botão principal em cima e o Voltar embaixo */
+@media (max-width: 600px) {
+  .rsvp-botoes {
+    flex-direction: column-reverse; /* Inverte a ordem para ficar amigável */
+    gap: 10px;
+  }
+  
+  .rsvp-botoes .btn-view-more {
+    width: 100%;
+  }
+}
+
+/* Quando um botão for desativado (Ex: se ele não digitar o nome) */
+.btn-view-more:disabled {
+  background-color: #aeb5a2;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
 
 /* =========================================
    RESPONSIVIDADE E O MENU PÍLULA MOBILE
@@ -670,7 +694,7 @@ body, html {
     border-top-left-radius: 25px;
     border-top-right-radius: 25px;
     box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.3);
-    padding-bottom: calc(10px + env(safe-area-inset-bottom)); 
+    padding-bottom: calc(10px + env(safe-area-inset-bottom)); /* Essa linha salva o layout nos celulares sem botão home */
   }
 
   .mobile-icon {
@@ -774,22 +798,24 @@ body, html {
      ========================================= */
   .hero-split {
     flex-direction: column;
-    height: 100vh;
+    height: 100dvh;
   }
   
   .hero-imagem {
     width: 100%;
-    height: 20vh; /* Foto travada no topo */
+    height: 20dvh; /* Foto travada no topo */
     flex-shrink: 0;
   }
   
   .hero-papel {
     width: 100%;
-    height: 100dvh; /* Papel rola independentemente */
+    flex: 1;/* Papel rola independentemente */
     margin-left: 0;
     margin-top: -35px;
     border-radius: 40px 40px 0 0;
-    padding: 40px 15px 130px 15px; /* Respiro pro menu não cobrir os botões */
+    /* O SEGREDO ESTÁ AQUI: Um padding inferior dinâmico muito grande para que
+       o último item não fique preso atrás do menu! */
+    padding: 40px 15px calc(150px + env(safe-area-inset-bottom)) 15px;
     box-shadow: inset 0px 10px 20px -7px #0707076d;
    /* box-shadow:  0px 30px 15px 50px #0707076d;*/
   }

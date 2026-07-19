@@ -10,6 +10,7 @@ export default function App() {
   const [presenteSelecionado, setPresenteSelecionado] = useState(null);
 
   // Formulário RSVP
+  const [step, setStep] = useState(1); // NOVO ESTADO AQUI
   const [nome, setNome] = useState('');
   const [presenca, setPresenca] = useState('Sim');
   const [quantidade, setQuantidade] = useState(0);
@@ -123,13 +124,24 @@ export default function App() {
 
       if (!resultado.ok) throw new Error("Erro");
       mostrarAviso("Confirmação enviada com sucesso! 🎉");
-      setIsModalOpen(false);
-      setNome(''); setQuantidade(0); setAcompanhantes([]);
+      fecharModalRSVP(); // Chama a função que reseta tudo
     } catch (error) {
       mostrarAviso("Erro ao enviar. Tente novamente.");
     } finally {
       setIsEnviando(false);
     }
+  };
+
+  // Nova função para resetar o modal ao fechar
+  const fecharModalRSVP = () => {
+    setIsModalOpen(false);
+    setTimeout(() => {
+      setStep(1);
+      setNome('');
+      setPresenca('Sim');
+      setQuantidade(0);
+      setAcompanhantes([]);
+    }, 300); // Aguarda a animação de fechar
   };
 
   const trocarSecao = (e, secao) => {
@@ -290,54 +302,97 @@ export default function App() {
         </div>
       )}
 
-      {/* MODAL RSVP */}
+     {/* MODAL RSVP EM ETAPAS */}
       {isModalOpen && (
         <div className="modal-overlay active">
           <div className="carta-antiga">
-            <button className="fechar-modal" onClick={() => setIsModalOpen(false)}>✕</button>
-            <h2 className="carta-titulo">RSVP</h2>
-            <p className="carta-texto">Por favor, confirme sua presença.</p>
+            <button className="fechar-modal" onClick={fecharModalRSVP}>✕</button>
+            <h2 className="carta-titulo">Confirme sua presença</h2>
+            
+            <form onSubmit={(e) => e.preventDefault()}>
+              
+              {/* PASSO 1: Vai ou não vai? */}
+              {step === 1 && (
+                <div className="step-container animar-entrada">
+                  <p className="carta-texto">Você poderá celebrar este dia conosco?</p>
+                  <div className="rsvp-botoes">
+                    <button type="button" className="btn-view-more" onClick={() => { setPresenca('Sim'); setStep(2); }}>Sim, eu irei!</button>
+                    <button type="button" className="btn-view-more btn-secundario" onClick={() => { setPresenca('Não'); setStep(2); }}>Infelizmente não</button>
+                  </div>
+                </div>
+              )}
 
-            <form onSubmit={enviarTelegram}>
-              <input type="text" className="input-carta" placeholder="Seu Nome Completo" required value={nome} onChange={(e) => setNome(e.target.value)} />
+              {/* PASSO 2: Nome Completo */}
+              {step === 2 && (
+                <div className="step-container animar-entrada">
+                  <p className="carta-texto">Qual o seu nome completo?</p>
+                  <input type="text" className="input-carta" placeholder="Digite seu nome..." required value={nome} onChange={(e) => setNome(e.target.value)} />
+                  
+                  <div className="rsvp-botoes">
+                    <button type="button" className="btn-view-more btn-secundario" onClick={() => setStep(1)}>Voltar</button>
+                    
+                    {/* Se a pessoa não vai, ela já finaliza aqui */}
+                    {presenca === 'Não' ? (
+                      <button type="button" className="btn-view-more" disabled={isEnviando || !nome.trim()} onClick={enviarTelegram}>
+                        {isEnviando ? "Enviando..." : "Confirmar Ausência"}
+                      </button>
+                    ) : (
+                      <button type="button" className="btn-view-more" disabled={!nome.trim()} onClick={() => setStep(3)}>Próximo</button>
+                    )}
+                  </div>
+                </div>
+              )}
 
-              <select className="input-carta" value={presenca} onChange={(e) => {
-                setPresenca(e.target.value);
-                if (e.target.value === 'Não') {
-                  setQuantidade(0);
-                  setAcompanhantes([]);
-                }
-              }}>
-                <option value="Sim">Sim, eu irei!</option>
-                <option value="Não">Infelizmente não poderei ir</option>
-              </select>
-
-              {presenca === 'Sim' && (
-                <>
+              {/* PASSO 3: Vai levar alguém? (Só aparece se Presença = Sim) */}
+              {step === 3 && presenca === 'Sim' && (
+                <div className="step-container animar-entrada">
+                  <p className="carta-texto">Você levará acompanhantes?</p>
                   <select className="input-carta" value={quantidade} onChange={handleQuantidadeChange}>
                     <option value="0">Irei sozinho(a)</option>
-                    <option value="1">Levarei 1 acompanhante</option>
-                    <option value="2">Levarei 2 acompanhantes</option>
-                    <option value="3">Levarei 3 acompanhantes</option>
-                    <option value="4">Levarei 4 acompanhantes</option>
+                    <option value="1">1 acompanhante</option>
+                    <option value="2">2 acompanhantes</option>
+                    <option value="3">3 acompanhantes</option>
+                    <option value="4">4 acompanhantes</option>
                   </select>
 
+                  <div className="rsvp-botoes">
+                    <button type="button" className="btn-view-more btn-secundario" onClick={() => setStep(2)}>Voltar</button>
+                    
+                    {/* Se escolheu 0 acompanhantes, já envia. Se for mais, vai pro passo 4 */}
+                    {quantidade === 0 ? (
+                      <button type="button" className="btn-view-more" disabled={isEnviando} onClick={enviarTelegram}>
+                        {isEnviando ? "Enviando..." : "Enviar Confirmação"}
+                      </button>
+                    ) : (
+                      <button type="button" className="btn-view-more" onClick={() => setStep(4)}>Próximo</button>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* PASSO 4: Nome dos Acompanhantes (Só aparece se Quantidade > 0) */}
+              {step === 4 && presenca === 'Sim' && quantidade > 0 && (
+                <div className="step-container animar-entrada">
+                  <p className="carta-texto">Nomes dos acompanhantes:</p>
                   <div className="acompanhantes-container">
                     {acompanhantes.map((acompanhante, index) => (
                       <input key={index} type="text" className="input-carta" placeholder={`Nome do Acompanhante ${index + 1}`} required value={acompanhante} onChange={(e) => handleAcompanhanteChange(index, e.target.value)} />
                     ))}
                   </div>
-                </>
+                  
+                  <div className="rsvp-botoes">
+                    <button type="button" className="btn-view-more btn-secundario" onClick={() => setStep(3)}>Voltar</button>
+                    <button type="button" className="btn-view-more" disabled={isEnviando || acompanhantes.some(a => !a.trim())} onClick={enviarTelegram}>
+                      {isEnviando ? "Enviando..." : "Enviar Confirmação"}
+                    </button>
+                  </div>
+                </div>
               )}
 
-              <button type="submit" className="btn-view-more" disabled={isEnviando} style={{ marginTop: '15px' }}>
-                {isEnviando ? "Enviando..." : "Enviar Resposta"}
-              </button>
             </form>
           </div>
         </div>
       )}
-
       <div className={`toast-notificacao ${toastMsg ? 'mostrar' : ''}`}>{toastMsg}</div>
     </div>
   );
