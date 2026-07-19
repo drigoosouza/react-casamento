@@ -373,7 +373,7 @@ body, html {
   border: none;
   padding: 10px 19px; /* Botão compacto */
   border-radius: 20px;
-  font-weight: 500;
+  font-weight: 300;
   letter-spacing: 1px;
   font-size: 0.75rem;
   cursor: pointer;
@@ -474,6 +474,88 @@ body, html {
 .mobile-navbar {
   display: none; 
 }
+/* =========================================
+   MODAL DE PAGAMENTO (PIX E CARTÃO)
+   ========================================= */
+.modal-pagamento {
+  background-color: var(--bg-color);
+  width: 90%;
+  max-width: 400px;
+  padding: 40px 30px;
+  border-radius: 20px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+}
+
+.pagamento-titulo {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  font-style: italic;
+  margin-bottom: 5px;
+}
+
+.pagamento-item {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 5px;
+  line-height: 1.2;
+}
+
+.pagamento-valor {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  font-weight: bold;
+  margin-bottom: 25px;
+}
+
+.qr-code-container {
+  background: #fff;
+  padding: 15px;
+  border-radius: 12px;
+  display: inline-block;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  margin-bottom: 20px;
+}
+
+.qr-code-container img {
+  width: 180px;
+  height: 180px;
+}
+
+.dica-pix {
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 20px;
+  padding: 0 10px;
+}
+
+.btn-copiar {
+  width: 100%;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.btn-cartao {
+  width: 100%;
+  background-color: #fcf9f2;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.btn-cartao:hover {
+  background-color: rgba(47, 59, 28, 0.1);
+  color: var(--primary-color);
+}
 
 /* =========================================
    RESPONSIVIDADE E O MENU PÍLULA MOBILE
@@ -566,17 +648,17 @@ body, html {
      ========================================= */
   .countdown-container {
     position: absolute;
-    top: 20px; /* Joga a contagem no topo da tela */
+    top: 2px; /* Joga a contagem no topo da tela */
     left: 50%;
     transform: translateX(-50%);
     z-index: 100;
     background: rgba(252, 249, 242, 0.545); /* Efeito vidro claro para contrastar na foto */
     backdrop-filter: blur(0);
-    padding: 6px 10px;
-    border-radius: 12px;
+    padding: 2px 10px;
+    border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     margin-bottom: 0;
-    gap: 8px;
+    gap: 2px;
     width: auto;
   }
 
@@ -617,7 +699,7 @@ body, html {
     width: 100%;
     height: 100vh; /* Papel rola independentemente */
     margin-left: 0;
-    margin-top: -80px;
+    margin-top: -170px;
     border-radius: 40px 40px 0 0;
     padding: 40px 15px 130px 15px; /* Respiro pro menu não cobrir os botões */
   }
@@ -630,7 +712,7 @@ body, html {
   .presentes-grid {
     grid-template-columns: repeat(2,1fr);
     margin: 20px;
-    gap: 30px;
+    gap: 10px;
   }
   .card-presente img {
     height: 130px;
@@ -644,12 +726,13 @@ body, html {
     font-size: 0.75rem;
   }
   .card-info p {
-    font-size: 0.7rem;
+    font-size: 0.9rem;
     margin-bottom: 6px;
   }
   .btn-presente {
-    font-size: 0.5rem;
-    padding: 7px 12px;
+    font-size: 0.7rem;
+    padding: 8px 12px;
+    color: var(--bg-color);
   }
 
   .galeria-grid {

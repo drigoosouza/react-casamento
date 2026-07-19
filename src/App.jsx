@@ -6,6 +6,7 @@ export default function App() {
   const [secaoAtiva, setSecaoAtiva] = useState('home');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [toastMsg, setToastMsg] = useState('');
+  const [presenteSelecionado, setPresenteSelecionado] = useState(null);
 
   // Formulário RSVP
   const [nome, setNome] = useState('');
@@ -18,80 +19,32 @@ export default function App() {
   // DADOS DA LISTA DE PRESENTES
   // Adicione, edite ou remova presentes facilmente aqui!
   // ==========================================
+  const PIX = '00020101021126580014br.gov.bcb.pix0136b57082f3-3cfb-40cc-b970-204fd78baec35204000053039865802BR5922RODRIGO SILVA DE SOUZA6008CAMACARI62070503***6304F92C'
+  const CARDCRED = 'https://link.mercadopago.com.br/rodrigoesanile'
   const listaDePresentes = [
-    {
-      id: 1,
-      titulo: 'Cota pro noivo cortar deixar o cabelo na régua 6 meses',
-      valor: 'R$ 150,00',
-      imagem: 'presentes/cabelo-regua.webp'
-    },
-    {
-      id: 2,
-      titulo: '12 meses de netflix para os noivos',
-      valor: 'R$ 243,60',
-      imagem: 'presentes/12-netflix.webp'
-    },
-    {
-      id: 3,
-      titulo: 'Pra não dizer que não dei nada ',
-      valor: 'R$ 50,00',
-      imagem: 'presentes/nao-dei-nada.webp'
-    },
-    {
-      id: 4,
-      titulo: 'look fit pra noivinha fazer academia',
-      valor: 'R$ 363,00',
-      imagem: 'presentes/look-fit.webp'
-    },
-    {
-      id: 5,
-      titulo: 'Cota pra ajudar na lua de mel',
-      valor: 'R$ 960,00',
-      imagem: 'presentes/lua-de-mel.webp'
-    },
-    {
-      id: 6,
-      titulo: 'Cota pra noiva não jogar o buquê em direção da sua namorada',
-      valor: 'R$ 263,13',
-      imagem: 'presentes/não-jogar-buquê.webp'
-    },
-    {
-      id: 7,
-      titulo: 'Cota pro noivo não se atrasar',
-      valor: 'R$ 133,46',
-      imagem: 'presentes/noivo-nao-atrasar.webp'
-    },
-    {
-      id: 8,
-      titulo: 'look fit pra noivinha fazer academia',
-      valor: 'R$ 363,00',
-      imagem: 'presentes/look-fit.webp'
-    },
-    {
-      id: 9,
-      titulo: 'look fit pra noivinha fazer academia',
-      valor: 'R$ 363,00',
-      imagem: 'presentes/look-fit.webp'
-    },
-    {
-      id: 10,
-      titulo: 'look fit pra noivinha fazer academia',
-      valor: 'R$ 363,00',
-      imagem: 'presentes/look-fit.webp'
-    },
-    {
-      id: 11,
-      titulo: 'look fit pra noivinha fazer academia',
-      valor: 'R$ 363,00',
-      imagem: 'presentes/look-fit.webp'
-    },
-    {
-      id: 12,
-      titulo: 'look fit pra noivinha fazer academia',
-      valor: 'R$ 363,00',
-      imagem: 'presentes/look-fit.webp'
-    }
-
+    { id: 1, titulo: 'Cota pro noivo cortar o cabelo na régua', valor: 'R$ 150,00', imagem: 'presentes/cabelo-regua.webp', pixCopiaECola: PIX  , linkCartao: CARDCRED },
+    { id: 2, titulo: 'Cesto para roupas dobrável', valor: 'R$ 49,54', imagem: 'presentes/cesto-roupa.webp', pixCopiaECola: PIX, linkCartao: CARDCRED },
+    { id: 3, titulo: 'Panela de pressão 4,2l', valor: 'R$ 197,91', imagem: 'presentes/panela-pressao.webp', pixCopiaECola: PIX, linkCartao: CARDCRED},
+    { id: 4, titulo: '12 meses de netflix para os noivos', valor: 'R$ 243,60', imagem: 'presentes/12-netflix.webp', pixCopiaECola: PIX, linkCartao: CARDCRED },
+    { id: 5, titulo: 'Pra não dizer que não dei nada', valor: 'R$ 50,00', imagem: 'presentes/nao-dei-nada.webp', pixCopiaECola: PIX, linkCartao: CARDCRED },
+    { id: 6, titulo: 'Look fit pra noivinha', valor: 'R$ 363,00', imagem: 'presentes/look-fit.webp', pixCopiaECola: PIX, linkCartao: CARDCRED },
+    { id: 7, titulo: 'Boleira de vidro', valor: 'R$ 73,01', imagem: 'presentes/boleira.webp', pixCopiaECola: PIX, linkCartao: CARDCRED },
+    { id: 8, titulo: 'Cota pra ajudar na lua de mel', valor: 'R$ 960,00', imagem: 'presentes/lua-de-mel.webp', pixCopiaECola: PIX, linkCartao: CARDCRED },
+    { id: 9, titulo: 'Cota pra não jogar buquê', valor: 'R$ 263,13', imagem: 'presentes/não-jogar-buquê.webp', pixCopiaECola: PIX, linkCartao: CARDCRED },
+    { id: 10, titulo: 'Porta pão Grande Retrátil', valor: 'R$ 79,88', imagem: 'presentes/porta-pao.webp', pixCopiaECola: PIX, linkCartao: CARDCRED },
+    { id: 11, titulo: 'Conjunto de assadeiras 3 peças', valor: 'R$ 56,99', imagem: 'presentes/conjunto-assadeiras.webp', pixCopiaECola: PIX, linkCartao: CARDCRED },
+    { id: 12, titulo: 'Jogo de panela 6 peças', valor: 'R$ 769,99', imagem: 'presentes/jogodepanela.webp', pixCopiaECola: PIX, linkCartao: CARDCRED },
+    { id: 13, titulo: 'Cota pro noivo não se atrasar', valor: 'R$ 133,46', imagem: 'presentes/noivo-nao-atrasar.webp', pixCopiaECola: PIX, linkCartao: CARDCRED },
+    { id: 14, titulo: 'Despertador pra noiva', valor: 'R$ 103,62', imagem: 'presentes/despertador-noiva.webp', pixCopiaECola: PIX, linkCartao: CARDCRED },
+    { id: 15, titulo: 'Eu dei o melhor presente!', valor: 'R$ 5.000,00', imagem: 'presentes/melhor-presente.webp', pixCopiaECola: PIX, linkCartao: CARDCRED },
+    { id: 16, titulo: 'Jogo de Talheres 24 peças', valor: 'R$ 71,05', imagem: 'presentes/jogo-talher.webp', pixCopiaECola: PIX, linkCartao: CARDCRED },
+    { id: 17, titulo: 'Kit com duas jarras de vidro', valor: 'R$ 72,60', imagem: 'presentes/kit-jarras.webp', pixCopiaECola: PIX, linkCartao: CARDCRED },
+    { id: 18, titulo: 'Kit 11 potes de vidro', valor: 'R$ 127,42', imagem: 'presentes/kit-potes.webp', pixCopiaECola: PIX, linkCartao: CARDCRED },
+    { id: 19, titulo: 'Cota pra não surtar', valor: 'R$ 230,00', imagem: 'presentes/surtar.webp', pixCopiaECola: PIX, linkCartao: CARDCRED },
+    { id: 20, titulo: 'Cota despedida de solteiro', valor: 'R$ 553,25', imagem: 'presentes/despedida-noivo.webp', pixCopiaECola: PIX, linkCartao: CARDCRED },
+    { id: 21, titulo: 'Conjunto assadeira de vidro', valor: 'R$ 123,17', imagem: 'presentes/kit-assadeiras-inox.webp', pixCopiaECola: PIX, linkCartao: CARDCRED },
+    { id: 22, titulo: 'Kit de copos de vidro 450ml', valor: 'R$ 41,60', imagem: 'presentes/kit-copos.webp', pixCopiaECola: PIX, linkCartao: CARDCRED },
+    { id: 23, titulo: 'Cota aposentadoria', valor: 'R$ 5.232,00', imagem: 'presentes/aposentadoria.webp', pixCopiaECola: PIX, linkCartao: CARDCRED }
   ];
 
   // ==========================================
@@ -141,7 +94,7 @@ export default function App() {
     e.preventDefault();
     setIsEnviando(true);
     let textoTelegram = "";
-    
+
     if (presenca === 'Sim') {
       textoTelegram = `💍 *Nova Confirmação!*\n\n✅ *${nome}* confirmou presença!`;
       const nomesValidos = acompanhantes.filter(a => a.trim() !== '');
@@ -151,16 +104,16 @@ export default function App() {
     } else {
       textoTelegram = `😔 *Aviso de Ausência*\n\nO(a) convidado(a) *${nome}* informou não comparecer.`;
     }
-    
+
     try {
-      const BOT_TOKEN = "SEU_TOKEN_AQUI"; 
+      const BOT_TOKEN = "SEU_TOKEN_AQUI";
       const CHAT_ID = "SEU_CHAT_ID_AQUI";
       const textConvert = encodeURIComponent(textoTelegram);
       const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${textConvert}&parse_mode=Markdown`;
-      
+
       const resposta = await fetch(url);
       const resultado = await resposta.json();
-      
+
       if (!resultado.ok) throw new Error("Erro");
       mostrarAviso("Confirmação enviada com sucesso! 🎉");
       setIsModalOpen(false);
@@ -177,9 +130,15 @@ export default function App() {
     setSecaoAtiva(secao);
   };
 
-  const abrirPix = (titulo) => {
-    // Aqui no futuro podemos abrir um modal com o QR Code específico!
-    alert(`Gerando PIX para: ${titulo}`);
+  const abrirModalPresente = (presente) => {
+    setPresenteSelecionado(presente);
+  };
+
+  const copiarPix = () => {
+    if (presenteSelecionado && presenteSelecionado.pixCopiaECola) {
+      navigator.clipboard.writeText(presenteSelecionado.pixCopiaECola);
+      mostrarAviso("Código Pix copiado! 📋");
+    }
   };
 
   return (
@@ -197,19 +156,19 @@ export default function App() {
       {/* MENU INFERIOR MOBILE */}
       <nav className="mobile-navbar">
         <a href="#" className={`mobile-icon ${secaoAtiva === 'home' ? 'active' : ''}`} onClick={(e) => trocarSecao(e, 'home')}>
-          <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" /></svg>
           <span className="menu-text">Início</span>
         </a>
         <a href="#" className={`mobile-icon ${secaoAtiva === 'cerimonia' ? 'active' : ''}`} onClick={(e) => trocarSecao(e, 'cerimonia')}>
-          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" /></svg>
           <span className="menu-text">Local</span>
         </a>
         <a href="#" className={`mobile-icon ${secaoAtiva === 'galeria' ? 'active' : ''}`} onClick={(e) => trocarSecao(e, 'galeria')}>
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/></svg>
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2" /><path d="M9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z" /></svg>
           <span className="menu-text">Fotos</span>
         </a>
         <a href="#" className={`mobile-icon ${secaoAtiva === 'presentes' ? 'active' : ''}`} onClick={(e) => trocarSecao(e, 'presentes')}>
-          <svg viewBox="0 0 24 24"><path d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1h-4v-2h4zM9 4c.55 0 1 .45 1 1h-4c0-.55.45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76 12 7.4l1 1.36L15.38 12 17 10.83 14.92 8H20v6z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1h-4v-2h4zM9 4c.55 0 1 .45 1 1h-4c0-.55.45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76 12 7.4l1 1.36L15.38 12 17 10.83 14.92 8H20v6z" /></svg>
           <span className="menu-text">Presentes</span>
         </a>
       </nav>
@@ -218,7 +177,7 @@ export default function App() {
       <section className="hero-split">
         <div className="hero-imagem">
           <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1000&auto=format&fit=crop" alt="Rodrigo e Saniele" />
-          
+
           <div className="countdown-container">
             <div className="countdown-box"><span>{tempo.dias}</span><small>Dias</small></div>
             <div className="countdown-box"><span>{tempo.horas}</span><small>Horas</small></div>
@@ -226,13 +185,12 @@ export default function App() {
             <div className="countdown-box"><span>{tempo.segundos}</span><small>Seg</small></div>
           </div>
         </div>
-        
+
         <div className="hero-papel">
-          
+
           {/* HOME */}
           {secaoAtiva === 'home' && (
             <div className="conteudo-animado">
-              <p className="hero-subtitulo">O CASAMENTO DE</p>
               <h1 className="hero-titulo">Rodrigo & Saniele</h1>
               <p className="data-casamento">06 de Setembro de 2026</p>
               <p className="hero-texto">Com imensa alegria, convidamos você para celebrar o início da nossa família.</p>
@@ -251,9 +209,9 @@ export default function App() {
                   <p><strong>Endereço:</strong> Praça da Matriz, Centro, Jacobina - BA</p>
                 </div>
                 <div className="mapa-container">
-                  <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3910.147321528445!2d-40.51860000000001!3d-11.1824!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x773356064dfca8b%3A0xc39f807212bf7744!2sIgreja%20Matriz%20Santo%20Ant%C3%B4nio!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr" 
-                    width="100%" height="300" style={{border:0}} allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3910.147321528445!2d-40.51860000000001!3d-11.1824!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x773356064dfca8b%3A0xc39f807212bf7744!2sIgreja%20Matriz%20Santo%20Ant%C3%B4nio!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr"
+                    width="100%" height="300" style={{ border: 0 }} allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade">
                   </iframe>
                 </div>
               </div>
@@ -275,28 +233,34 @@ export default function App() {
             </div>
           )}
 
-          {/* PRESENTES - USANDO O NOVO COMPONENTE E O MAP */}
           {secaoAtiva === 'presentes' && (
             <div className="conteudo-animado page-section">
               <h2 className="section-title">Lista de Presentes</h2>
-              <p className="section-subtitle">Sua presença é nosso maior presente!</p>
-              
               <div className="presentes-grid">
-                {listaDePresentes.map((presente) => (
-                  <CardPresente 
-                    key={presente.id}
-                    imagem={presente.imagem}
-                    titulo={presente.titulo}
-                    valor={presente.valor}
-                    onPresentear={() => abrirPix(presente.titulo)}
-                  />
+                {listaDePresentes.map((p, i) => (
+                  <CardPresente key={p.id || i} imagem={p.imagem} titulo={p.titulo} valor={p.valor} onPresentear={() => abrirModalPresente(p)} />
                 ))}
               </div>
-              
             </div>
           )}
         </div>
       </section>
+      {/* MODAL PAGAMENTO */}
+      {presenteSelecionado && (
+        <div className="modal-overlay active">
+          <div className="modal-pagamento">
+            <button className="fechar-modal" onClick={() => setPresenteSelecionado(null)}>✕</button>
+            <h2 className="pagamento-titulo">Presentear</h2>
+            <p className="pagamento-item">{presenteSelecionado.titulo}</p>
+            <p className="pagamento-valor">{presenteSelecionado.valor}</p>
+            <div className="qr-code-container">
+              <img src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(presenteSelecionado.pixCopiaECola)}`} alt="QR Code Pix" />
+            </div>
+            <button className="btn-view-more btn-copiar" onClick={copiarPix}>📋 Copiar Pix (Copia e Cola)</button>
+            <a href={presenteSelecionado.linkCartao} target="_blank" rel="noopener noreferrer" className="btn-view-more btn-cartao">💳 Pagar com Cartão</a>
+          </div>
+        </div>
+      )}
 
       {/* MODAL RSVP (MANTIDO O MESMO) */}
       {isModalOpen && (
@@ -309,14 +273,14 @@ export default function App() {
 
             <form onSubmit={enviarTelegram}>
               <input type="text" className="input-carta" placeholder="Seu Nome Completo" required value={nome} onChange={(e) => setNome(e.target.value)} />
-              
+
               <select className="input-carta" value={presenca} onChange={(e) => {
-                  setPresenca(e.target.value);
-                  if (e.target.value === 'Não') {
-                    setQuantidade(0);
-                    setAcompanhantes([]);
-                  }
-                }}>
+                setPresenca(e.target.value);
+                if (e.target.value === 'Não') {
+                  setQuantidade(0);
+                  setAcompanhantes([]);
+                }
+              }}>
                 <option value="Sim">Sim, eu irei!</option>
                 <option value="Não">Infelizmente não poderei ir</option>
               </select>
@@ -339,7 +303,7 @@ export default function App() {
                 </>
               )}
 
-              <button type="submit" className="btn-view-more" disabled={isEnviando} style={{marginTop: '15px'}}>
+              <button type="submit" className="btn-view-more" disabled={isEnviando} style={{ marginTop: '15px' }}>
                 {isEnviando ? "Enviando..." : "Enviar Resposta"}
               </button>
             </form>
