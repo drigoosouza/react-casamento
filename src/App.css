@@ -318,7 +318,7 @@ body, html {
    ========================================= */
 .presentes-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Sempre 3 colunas */
+  grid-template-columns: repeat(3, 1fr); /* Sempre 3 colunas */
   gap: 15px; /* Espaçamento menor para acomodar 3 colunas */
 }
 
@@ -338,7 +338,7 @@ body, html {
 
 .card-presente img {
   width: 100%;
-  height: auto; /* Altura reduzida para os cards menores */
+  height: 200px; /* Altura reduzida para os cards menores */
   object-fit: cover;
 }
 
@@ -628,11 +628,13 @@ body, html {
 
   /* Ajuste responsivo para os grids de 3 colunas em telas muito pequenas */
   .presentes-grid {
+    grid-template-columns: repeat(2,1fr);
     margin: 20px;
     gap: 30px;
   }
   .card-presente img {
-    height: 100px;
+    height: 130px;
+    object-fit: cover;
   }
   .card-info {
     padding: 6px;

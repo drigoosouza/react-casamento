@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import CardPresente from './cards-present/cards'; // Importando o nosso novo componente
 import './App.css';
 
 export default function App() {
@@ -12,6 +13,86 @@ export default function App() {
   const [quantidade, setQuantidade] = useState(0);
   const [acompanhantes, setAcompanhantes] = useState([]);
   const [isEnviando, setIsEnviando] = useState(false);
+
+  // ==========================================
+  // DADOS DA LISTA DE PRESENTES
+  // Adicione, edite ou remova presentes facilmente aqui!
+  // ==========================================
+  const listaDePresentes = [
+    {
+      id: 1,
+      titulo: 'Cota pro noivo cortar deixar o cabelo na régua 6 meses',
+      valor: 'R$ 150,00',
+      imagem: 'presentes/cabelo-regua.webp'
+    },
+    {
+      id: 2,
+      titulo: '12 meses de netflix para os noivos',
+      valor: 'R$ 243,60',
+      imagem: 'presentes/12-netflix.webp'
+    },
+    {
+      id: 3,
+      titulo: 'Pra não dizer que não dei nada ',
+      valor: 'R$ 50,00',
+      imagem: 'presentes/nao-dei-nada.webp'
+    },
+    {
+      id: 4,
+      titulo: 'look fit pra noivinha fazer academia',
+      valor: 'R$ 363,00',
+      imagem: 'presentes/look-fit.webp'
+    },
+    {
+      id: 5,
+      titulo: 'Cota pra ajudar na lua de mel',
+      valor: 'R$ 960,00',
+      imagem: 'presentes/lua-de-mel.webp'
+    },
+    {
+      id: 6,
+      titulo: 'Cota pra noiva não jogar o buquê em direção da sua namorada',
+      valor: 'R$ 263,13',
+      imagem: 'presentes/não-jogar-buquê.webp'
+    },
+    {
+      id: 7,
+      titulo: 'Cota pro noivo não se atrasar',
+      valor: 'R$ 133,46',
+      imagem: 'presentes/noivo-nao-atrasar.webp'
+    },
+    {
+      id: 8,
+      titulo: 'look fit pra noivinha fazer academia',
+      valor: 'R$ 363,00',
+      imagem: 'presentes/look-fit.webp'
+    },
+    {
+      id: 9,
+      titulo: 'look fit pra noivinha fazer academia',
+      valor: 'R$ 363,00',
+      imagem: 'presentes/look-fit.webp'
+    },
+    {
+      id: 10,
+      titulo: 'look fit pra noivinha fazer academia',
+      valor: 'R$ 363,00',
+      imagem: 'presentes/look-fit.webp'
+    },
+    {
+      id: 11,
+      titulo: 'look fit pra noivinha fazer academia',
+      valor: 'R$ 363,00',
+      imagem: 'presentes/look-fit.webp'
+    },
+    {
+      id: 12,
+      titulo: 'look fit pra noivinha fazer academia',
+      valor: 'R$ 363,00',
+      imagem: 'presentes/look-fit.webp'
+    }
+
+  ];
 
   // ==========================================
   // CONTAGEM REGRESSIVA PARA 06/09/2026
@@ -96,6 +177,11 @@ export default function App() {
     setSecaoAtiva(secao);
   };
 
+  const abrirPix = (titulo) => {
+    // Aqui no futuro podemos abrir um modal com o QR Code específico!
+    alert(`Gerando PIX para: ${titulo}`);
+  };
+
   return (
     <div className="app-container">
       {/* MENU SUPERIOR DESKTOP */}
@@ -108,7 +194,7 @@ export default function App() {
         </ul>
       </nav>
 
-      {/* MENU INFERIOR MOBILE COM TEXTO EM BAIXO DO ÍCONE */}
+      {/* MENU INFERIOR MOBILE */}
       <nav className="mobile-navbar">
         <a href="#" className={`mobile-icon ${secaoAtiva === 'home' ? 'active' : ''}`} onClick={(e) => trocarSecao(e, 'home')}>
           <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
@@ -128,14 +214,11 @@ export default function App() {
         </a>
       </nav>
 
-      {/* ==========================================
-          TELA PRINCIPAL COM CONTEÚDO DINÂMICO
-          ========================================== */}
+      {/* TELA PRINCIPAL */}
       <section className="hero-split">
         <div className="hero-imagem">
           <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1000&auto=format&fit=crop" alt="Rodrigo e Saniele" />
           
-          {/* A Contagem Regressiva que no mobile vai flutuar no topo do painel esquerdo */}
           <div className="countdown-container">
             <div className="countdown-box"><span>{tempo.dias}</span><small>Dias</small></div>
             <div className="countdown-box"><span>{tempo.horas}</span><small>Horas</small></div>
@@ -144,24 +227,20 @@ export default function App() {
           </div>
         </div>
         
-        {/* PAPEL (CONTEÚDO DINÂMICO) */}
         <div className="hero-papel">
           
-          {/* CONTEÚDO 1: INÍCIO */}
+          {/* HOME */}
           {secaoAtiva === 'home' && (
             <div className="conteudo-animado">
+              <p className="hero-subtitulo">O CASAMENTO DE</p>
               <h1 className="hero-titulo">Rodrigo & Saniele</h1>
-              
-              {/* Data que aparece no lugar do cronômetro no mobile */}
               <p className="data-casamento">06 de Setembro de 2026</p>
-
               <p className="hero-texto">Com imensa alegria, convidamos você para celebrar o início da nossa família.</p>
-              
               <button className="btn-view-more" onClick={() => setIsModalOpen(true)}>Confirmar Presença</button>
             </div>
           )}
 
-          {/* CONTEÚDO 2: CERIMÔNIA */}
+          {/* CERIMÔNIA */}
           {secaoAtiva === 'cerimonia' && (
             <div className="conteudo-animado page-section">
               <h2 className="section-title">Cerimônia</h2>
@@ -181,7 +260,7 @@ export default function App() {
             </div>
           )}
 
-          {/* CONTEÚDO 3: GALERIA */}
+          {/* GALERIA */}
           {secaoAtiva === 'galeria' && (
             <div className="conteudo-animado page-section">
               <h2 className="section-title">Nossa Galeria</h2>
@@ -196,86 +275,55 @@ export default function App() {
             </div>
           )}
 
-          {/* CONTEÚDO 4: PRESENTES */}
+          {/* PRESENTES - USANDO O NOVO COMPONENTE E O MAP */}
           {secaoAtiva === 'presentes' && (
             <div className="conteudo-animado page-section">
               <h2 className="section-title">Lista de Presentes</h2>
               <p className="section-subtitle">Sua presença é nosso maior presente!</p>
+              
               <div className="presentes-grid">
-                
-                <div className="card-presente">
-                  <img src="/presentes/12-netflix.webp" alt="Cota Lua de Mel" />
-                  <div className="card-info">
-                    <h3>6 meses de netflix para os noivos</h3>
-                    <p>R$ 121,80</p>
-                    <button className="btn-presente" onClick={() => alert("Exibir PIX aqui")}>Presentear</button>
-                  </div>
-                </div>
-
-                <div className="card-presente">
-                  <img src="/presentes/nao-dei-nada.webp" alt="Jantar" />
-                  <div className="card-info">
-                    <h3>Só pra não dizer que não dei nada</h3>
-                    <p>R$ 50,00</p>
-                    <button className="btn-presente" onClick={() => alert("Exibir PIX aqui")}>Presentear</button>
-                  </div>
-                </div>
-
-                <div className="card-presente">
-                  <img src="/presentes/cabelo-regua.webp" alt="Jogo de Pratos" />
-                  <div className="card-info">
-                    <h3>Cota pra deixar o cabelo do noivo na régua por 1 ano</h3>
-                    <p>R$ 300,00</p>
-                    <button className="btn-presente" onClick={() => alert("Exibir PIX aqui")}>Presentear</button>
-                  </div>
-                </div>
-
+                {listaDePresentes.map((presente) => (
+                  <CardPresente 
+                    key={presente.id}
+                    imagem={presente.imagem}
+                    titulo={presente.titulo}
+                    valor={presente.valor}
+                    onPresentear={() => abrirPix(presente.titulo)}
+                  />
+                ))}
               </div>
+              
             </div>
           )}
         </div>
       </section>
 
-      {/* MODAL RSVP */}
+      {/* MODAL RSVP (MANTIDO O MESMO) */}
       {isModalOpen && (
         <div className="modal-overlay active">
+          {/* ... Código do modal continua igual ... */}
           <div className="carta-antiga">
             <button className="fechar-modal" onClick={() => setIsModalOpen(false)}>✕</button>
             <h2 className="carta-titulo">RSVP</h2>
             <p className="carta-texto">Por favor, confirme sua presença.</p>
 
             <form onSubmit={enviarTelegram}>
-              <input 
-                type="text" 
-                className="input-carta" 
-                placeholder="Seu Nome Completo" 
-                required 
-                value={nome}
-                onChange={(e) => setNome(e.target.value)}
-              />
+              <input type="text" className="input-carta" placeholder="Seu Nome Completo" required value={nome} onChange={(e) => setNome(e.target.value)} />
               
-              <select 
-                className="input-carta" 
-                value={presenca}
-                onChange={(e) => {
+              <select className="input-carta" value={presenca} onChange={(e) => {
                   setPresenca(e.target.value);
                   if (e.target.value === 'Não') {
                     setQuantidade(0);
                     setAcompanhantes([]);
                   }
-                }}
-              >
+                }}>
                 <option value="Sim">Sim, eu irei!</option>
                 <option value="Não">Infelizmente não poderei ir</option>
               </select>
 
               {presenca === 'Sim' && (
                 <>
-                  <select 
-                    className="input-carta" 
-                    value={quantidade} 
-                    onChange={handleQuantidadeChange}
-                  >
+                  <select className="input-carta" value={quantidade} onChange={handleQuantidadeChange}>
                     <option value="0">Irei sozinho(a)</option>
                     <option value="1">Levarei 1 acompanhante</option>
                     <option value="2">Levarei 2 acompanhantes</option>
@@ -285,15 +333,7 @@ export default function App() {
 
                   <div className="acompanhantes-container">
                     {acompanhantes.map((acompanhante, index) => (
-                      <input 
-                        key={index}
-                        type="text" 
-                        className="input-carta" 
-                        placeholder={`Nome do Acompanhante ${index + 1}`} 
-                        required
-                        value={acompanhante}
-                        onChange={(e) => handleAcompanhanteChange(index, e.target.value)}
-                      />
+                      <input key={index} type="text" className="input-carta" placeholder={`Nome do Acompanhante ${index + 1}`} required value={acompanhante} onChange={(e) => handleAcompanhanteChange(index, e.target.value)} />
                     ))}
                   </div>
                 </>
@@ -307,7 +347,7 @@ export default function App() {
         </div>
       )}
 
-      {/* Toast de Notificação */}
+      {/* Toast */}
       <div className={`toast-notificacao ${toastMsg ? 'mostrar' : ''}`}>{toastMsg}</div>
     </div>
   );
