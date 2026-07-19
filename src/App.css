@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ms+Madi&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
 /* Fontes e Cores Base */
 :root {
@@ -91,7 +92,7 @@ body, html {
 }
 
 .hero-imagem img {
-  width: 100%;
+  width: 120%;
   height: 100%;
   object-fit: cover;
 }
@@ -101,8 +102,8 @@ body, html {
   width: 55%;
   margin-left: -5%;
   background-color: var(--bg-color);
-  border-radius: 120px 0 0 120px;
-  box-shadow: -15px 0 40px rgba(0,0,0,0.1);
+  border-radius: 150px 0 0 150px;
+  box-shadow: -50px 0 40px rgba(0, 0, 0, 0.234);
   
   display: flex;
   flex-direction: column;
@@ -167,7 +168,7 @@ body, html {
 }
 
 .hero-texto {
-  font-size: 1rem;
+  font-size: .75rem;
   max-width: 450px;
   color: #666;
   line-height: 1.6;
@@ -184,8 +185,9 @@ body, html {
   border: none;
   padding: 15px 40px;
   border-radius: 30px;
-  font-family: var(--font-body);
-  font-size: 0.9rem;
+  font-family: 'roboto';
+  font-weight: 500;
+  font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 2px;
   cursor: pointer;
@@ -251,32 +253,34 @@ body, html {
 }
 
 .cerimonia-content {
-  background: #fff;
+
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-  margin-top: 20px;
 }
 
 .cerimonia-dados {
   padding: 30px;
-  background: var(--primary-color);
-  color: #fff;
+  color: var(--primary-color);
 }
 
 .cerimonia-dados h3 {
-  font-size: 1.8rem;
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 2rem;
   margin-bottom: 15px;
 }
 
 .cerimonia-dados p {
   margin-bottom: 5px;
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 .mapa-container {
-  width: 100%;
-  height: 300px;
+  width: auto;
+  height: auto;
+}
+.mapa-container iframe{
+  border-radius: 20px;
 }
 
 /* =========================================
@@ -370,10 +374,11 @@ body, html {
   text-align: center;
   background:#2f3b1c;
   color: var(--bg-color);
+  font-family: "roboto";
   border: none;
   padding: 10px 19px; /* Botão compacto */
   border-radius: 20px;
-  font-weight: 300;
+  font-weight: 400;
   letter-spacing: 1px;
   font-size: 0.75rem;
   cursor: pointer;
@@ -477,6 +482,9 @@ body, html {
 /* =========================================
    MODAL DE PAGAMENTO (PIX E CARTÃO)
    ========================================= */
+/* =========================================
+   MODAL DE PAGAMENTO (PIX E CARTÃO)
+   ========================================= */
 .modal-pagamento {
   background-color: var(--bg-color);
   width: 90%;
@@ -532,12 +540,14 @@ body, html {
 }
 
 .btn-copiar {
+  font-size: 0.6rem;
   width: 100%;
   margin-bottom: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
+  padding: 10px 5px
 }
 
 .btn-cartao {
@@ -555,6 +565,80 @@ body, html {
 .btn-cartao:hover {
   background-color: rgba(47, 59, 28, 0.1);
   color: var(--primary-color);
+}
+/* =========================================
+   TELA DE BOAS VINDAS (CAPA DO CONVITE)
+   ========================================= */
+.tela-boas-vindas {
+  height: 100vh;
+  width: 100vw;
+  background-color: var(--bg-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  /* Se quiser, pode colocar a foto de vocês desfocada de fundo aqui */
+  /* background: url('SUA_IMAGEM.jpg') center/cover; */
+}
+
+.boas-vindas-conteudo {
+  background: rgba(252, 249, 242, 0.95);
+  padding: 50px 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+  border: 1px solid rgba(47, 59, 28, 0.1);
+  animation: fadeIn 1s ease-in-out;
+}
+
+.boas-vindas-data {
+  font-family: var(--font-body);
+  font-size: 1.4rem;
+  color: var(--text-dark);
+  margin-top: -15px;
+  margin-bottom: 30px;
+  letter-spacing: 2px;
+}
+
+.btn-entrar {
+  font-size: 1rem;
+  padding: 15px 50px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* =========================================
+   BOTÕES DA TELA HOME
+   ========================================= */
+.home-botoes {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.home-botoes .btn-view-more {
+  width: 100%; /* Faz todos os botões terem o mesmo tamanho */
+}
+
+/* Estilo para os botões secundários não roubarem a cena do "Confirmar Presença" */
+.btn-secundario {
+  background-color: transparent;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+
+.btn-secundario:hover {
+  background-color: rgba(47, 59, 28, 0.1);
+  color: var(--primary-color);
+  opacity: 1;
 }
 
 /* =========================================
@@ -648,7 +732,7 @@ body, html {
      ========================================= */
   .countdown-container {
     position: absolute;
-    top: 2px; /* Joga a contagem no topo da tela */
+    top: 10%; /* Joga a contagem no topo da tela */
     left: 50%;
     transform: translateX(-50%);
     z-index: 100;
@@ -691,17 +775,19 @@ body, html {
   
   .hero-imagem {
     width: 100%;
-    height: 40vh; /* Foto travada no topo */
+    height: 20vh; /* Foto travada no topo */
     flex-shrink: 0;
   }
   
   .hero-papel {
     width: 100%;
-    height: 100vh; /* Papel rola independentemente */
+    height: 100dvh; /* Papel rola independentemente */
     margin-left: 0;
-    margin-top: -170px;
+    margin-top: -35px;
     border-radius: 40px 40px 0 0;
     padding: 40px 15px 130px 15px; /* Respiro pro menu não cobrir os botões */
+    box-shadow: inset 0px 10px 20px -7px #0707076d;
+   /* box-shadow:  0px 30px 15px 50px #0707076d;*/
   }
   
   .hero-titulo {
