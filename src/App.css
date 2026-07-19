@@ -178,6 +178,9 @@ body, html {
   margin-left: auto;
   margin-right: auto;
 }
+.btn-lista{
+  margin-bottom: 20px;
+}
 
 .btn-view-more {
   background-color: var(--primary-color);
@@ -259,7 +262,7 @@ body, html {
 }
 
 .cerimonia-dados {
-  padding: 30px;
+  padding: 15px;
   color: var(--primary-color);
 }
 
@@ -357,16 +360,17 @@ body, html {
 }
 
 .card-info h3 {
+  font-family: "roboto";
   color: var(--primary-color);
-  font-size: 0.95rem; /* Fonte menor */
+  font-size: 0.85rem; /* Fonte menor */
   margin-bottom: 4px;
-  line-height: 1;
 }
 
 .card-info p {
-  color: #666;
+  font-family: "roboto";
+  color: #080908;
   font-weight: 600;
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   margin-bottom: 10px;
 }
 
@@ -810,9 +814,10 @@ body, html {
   }
   .card-info h3 {
     font-size: 0.75rem;
+    font-weight: 400;
   }
   .card-info p {
-    font-size: 0.9rem;
+    font-size: .8rem;
     margin-bottom: 6px;
   }
   .btn-presente {

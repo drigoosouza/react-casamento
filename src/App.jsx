@@ -3,8 +3,6 @@ import CardPresente from './cards-present/cards';
 import './App.css';
 
 export default function App() {
-  // NOVO: Estado para a Tela de Boas-Vindas
-  const [entrouNoSite, setEntrouNoSite] = useState(false);
 
   const [secaoAtiva, setSecaoAtiva] = useState('home');
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -24,11 +22,11 @@ export default function App() {
   const PIX = '00020101021126580014br.gov.bcb.pix0136b57082f3-3cfb-40cc-b970-204fd78baec35204000053039865802BR5922RODRIGO SILVA DE SOUZA6008CAMACARI62070503***6304F92C'
   const CARDCRED = 'https://link.mercadopago.com.br/rodrigoesanile'
   const listaDePresentes = [
-    { id: 1, titulo: 'Cota pro noivo cortar o cabelo na régua', valor: 'R$ 150,00', imagem: 'presentes/cabelo-regua.webp', pixCopiaECola: PIX, linkCartao: CARDCRED },
+    { id: 1, titulo: '12 meses de netflix para os noivos', valor: 'R$ 243,60', imagem: 'presentes/12-netflix.webp' , pixCopiaECola: PIX, linkCartao: CARDCRED },
     { id: 2, titulo: 'Cesto para roupas dobrável', valor: 'R$ 49,54', imagem: 'presentes/cesto-roupa.webp', pixCopiaECola: PIX, linkCartao: CARDCRED },
     { id: 3, titulo: 'Look fit pra noivinha', valor: 'R$ 363,00', imagem: 'presentes/look-fit.webp', pixCopiaECola: PIX, linkCartao: CARDCRED },
     { id: 4, titulo: 'Panela de pressão 4,2l', valor: 'R$ 197,91', imagem: 'presentes/panela-pressao.webp', pixCopiaECola: PIX, linkCartao: CARDCRED },
-    { id: 5, titulo: '12 meses de netflix para os noivos', valor: 'R$ 243,60', imagem: 'presentes/12-netflix.webp', pixCopiaECola: PIX, linkCartao: CARDCRED },
+    { id: 5, titulo: 'Cota pro noivo deixar o cabelo na régua 6 meses', valor: 'R$ 150,00', imagem: 'presentes/cabelo-regua.webp', pixCopiaECola: PIX, linkCartao: CARDCRED },
     { id: 6, titulo: 'Ventilador de coluna', valor: 'R$ 144,49', imagem: 'presentes/ventilador.webp', pixCopiaECola: PIX, linkCartao: CARDCRED },
     { id: 7, titulo: 'Pra não dizer que não dei nada', valor: 'R$ 50,00', imagem: 'presentes/nao-dei-nada.webp', pixCopiaECola: PIX, linkCartao: CARDCRED },
     { id: 8, titulo: 'Picador/triturador de alimentos', valor: 'R$ 75,92', imagem: 'presentes/picador.webp', pixCopiaECola: PIX, linkCartao: CARDCRED },
@@ -56,7 +54,6 @@ export default function App() {
     { id: 30, titulo: 'Coberdrom Cobertor casal', valor: 'R$ 93,49', imagem: 'presentes/edredom.webp', pixCopiaECola: PIX, linkCartao: CARDCRED },
     { id: 31, titulo: 'Cota aposentadoria', valor: 'R$ 5.232,00', imagem: 'presentes/aposentadoria.webp', pixCopiaECola: PIX, linkCartao: CARDCRED }
   ];
-
 
   // ==========================================
   // CONTAGEM REGRESSIVA
@@ -203,12 +200,11 @@ export default function App() {
             <div className="conteudo-animado">
               <h1 className="hero-titulo">Rodrigo & Saniele</h1>
               <p className="data-casamento">06 de Setembro de 2026</p>
-              <p className="hero-texto">Com imensa alegria, convidamos você para celebrar o início da nossa família.</p>
 
               <div className="home-botoes">
                 <button className="btn-view-more" onClick={() => setIsModalOpen(true)}>Confirmar Presença</button>
                 <button className="btn-view-more btn-secundario" onClick={() => trocarSecao(null, 'cerimonia')}>📍 Localização do Evento</button>
-                <button className="btn-view-more btn-secundario" onClick={() => trocarSecao(null, 'presentes')}>🎁 Lista de Presentes</button>
+                <button className="btn-view-more btn-secundario btn-lista" onClick={() => trocarSecao(null, 'presentes')}>🎁 Lista de Presentes</button>
               </div>
             </div>
           )}
